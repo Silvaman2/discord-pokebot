@@ -1,10 +1,10 @@
 const { Client, Events, GatewayIntentBits, DiscordAPIError, Collection } = require(`discord.js`);
 const { token } = require(`./config.json`);
-const commandHandler = require("./utils/commandHandler");
+const Utils = require("./utils.js");
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-client.commands = commandHandler();
+client.commands = Utils.commandHandler();
 
 
 client.once(Events.ClientReady, () => {
