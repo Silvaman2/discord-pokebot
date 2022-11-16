@@ -1,8 +1,10 @@
-const { Client, Events, GatewayIntentBits } = require(`discord.js`);
+const { Client, Events, GatewayIntentBits, DiscordAPIError, Collection } = require(`discord.js`);
 const { token } = require(`./config.json`);
+const commandHandler = require("./utils/commandHandler");
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
+client.commands = commandHandler();
 
 
 client.once(Events.ClientReady, () => {
@@ -12,6 +14,9 @@ client.once(Events.ClientReady, () => {
 });
 
 
+client.on(Events.MessageCreate, (message) => {
+
+})
 
 
 
