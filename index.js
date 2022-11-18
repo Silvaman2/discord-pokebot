@@ -13,7 +13,7 @@ client.once(Events.ClientReady, () => {
 });
 
 
-client.on(Events.MessageCreate, (message) => {
+client.on(Events.MessageCreate, message => {
     if(message.member.user.bot || !message.content.startsWith(prefix)) return;
 
     const messageArray = message.content

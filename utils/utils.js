@@ -21,6 +21,13 @@ class Utils {
         message.channel.send(inputString);
     }
 
+    static async fetchJSON(url) {
+        const request = await fetch(url);
+        const result = await request.json();
+
+        return result;
+    }
+
 }
 
 
