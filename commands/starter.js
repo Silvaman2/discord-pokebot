@@ -21,15 +21,15 @@ module.exports = {
             description:'To choose a starter Pokémon, use the `!choose {pokemonName}` command.',
             fields:[
                 {
-                    name:'I.Kanto',
+                    name:'I. Kanto',
                     value:'Bulbasaur · Charmander · Squirtle'
                 },
                 {
-                    name:'II.Johto',
+                    name:'II. Johto',
                     value:'Chikorita · Cyndaquil · Totodile'
                 },
                 {
-                    name:'III.Hoenn',
+                    name:'III. Hoenn',
                     value:'Treecko · Torchic · Mudkip'
                 },
             ],
