@@ -1,6 +1,5 @@
 const { AttachmentBuilder, EmbedBuilder } = require("discord.js");
 const Pokemon = require("../utils/pokemon");
-const { starterPokemon, getPokemon } = require("../utils/pokemon");
 const { getTrainerPokemon, pushPokemon } = require("../utils/trainer");
 const { reply, simpleEmbed, capitalizeFirstLetter } = require('../utils/utils');
 
@@ -55,12 +54,12 @@ module.exports = {
         .split(' ')[1]
         .toLowerCase();
 
-        if(!starterPokemon.includes(pokemonName)) {
+        if(!Pokemon.starterPokemon.includes(pokemonName)) {
             reply(message, simpleEmbed('Invalid starter Pokémon!'));
             return;
         }
 
-        const data = await getPokemon(pokemonName);
+        const data = await Pokemon.getPokemon(pokemonName);
         const newPokemon = new Pokemon(data);
 
         pushPokemon(userId, newPokemon);
