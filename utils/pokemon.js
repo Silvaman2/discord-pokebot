@@ -1,11 +1,9 @@
 const { fetchJSON } = require("./utils");
 
 class Pokemon {
-    constructor(id) {
-        Pokemon.getPokemon(id).then(data => {
-        this[`name`] = data[`name`];
-        this[`base_experience`] = data[`base_experience`];
-        })
+    constructor(data) {
+    this[`id`] = data[`id`];
+    this[`name`] = data[`name`];
     }
 
     static async getPokemon(element) {
@@ -15,5 +13,8 @@ class Pokemon {
         return pokemon;
     }
 
-
+    
 }
+
+
+module.exports = Pokemon;
