@@ -1,5 +1,5 @@
 const Pokemon = require(`../utils/pokemon`);
-const Trainer = require("../utils/trainer");
+const { getTrainerPokemon, pushPokemon } = require("../utils/trainer");
 const { reply } = require("../utils/utils");
 
 module.exports = {
@@ -9,7 +9,7 @@ module.exports = {
         const userId = message.author.id;
         const pokemonId = args.shift();
 
-        if(!Trainer.canPush(userId)) {
+        if(getTrainerPokemon(userId).length >= 6) {
             reply(message, 'Your inventory is full, store or discard a Pokemon from your inventory!');
             return;
         }
@@ -17,7 +17,7 @@ module.exports = {
         const pokemonData = await Pokemon.getPokemon(pokemonId);
         const pokemon = new Pokemon(pokemonData);
 
-        Trainer.pushPokemon(userId, pokemon);
+        pushPokemon(userId, pokemon);
         reply(message, 'The desired Pokemon has been pushed.');
     }
 }

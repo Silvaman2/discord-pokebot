@@ -13,7 +13,17 @@ class Pokemon {
         return pokemon;
     }
 
-    
+    static starterPokemon = [
+        'bulbasaur',
+        'charmander',
+        'squirtle',
+        'chikorita',
+        'cyndaquil',
+        'totodile',
+        'treecko',
+        'torchic',
+        'mudkip'
+    ]
 }
 
 

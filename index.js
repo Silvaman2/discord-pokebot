@@ -14,7 +14,7 @@ client.once(Events.ClientReady, () => {
 
 
 client.on(Events.MessageCreate, message => {
-    if(message.member.user.bot || !message.content.startsWith(prefix)) return;
+    if(message.author.bot || !message.content.startsWith(prefix)) return;
 
     const messageArray = message.content
     .slice(prefix.length)
@@ -23,11 +23,12 @@ client.on(Events.MessageCreate, message => {
     const command = messageArray.shift();
     const arguments = messageArray;
 
-    try {
-        client.commands.get(command).execute(message, arguments);
-    } catch (e) {
-        Utils.reply(message, `Command not found.`);
-        console.log(e);
+    if(Array.from(client.commands.keys()).includes(command)) {
+        try {
+            client.commands.get(command).execute(message, arguments);
+        } catch (e) {
+            console.log(e);
+        }
     }
 })
 

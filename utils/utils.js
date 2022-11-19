@@ -28,6 +28,19 @@ class Utils {
         return result;
     }
 
+    static simpleEmbed(title) {
+        return {
+            embeds:[{
+                color:16732992,
+                title:title
+            }]
+        }
+    }
+
+    static capitalizeFirstLetter(string) {
+        return string[0].toUpperCase() + string.substring(1);
+      }
+
 }
 
 

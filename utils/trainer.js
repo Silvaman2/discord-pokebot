@@ -10,15 +10,15 @@ class Trainer {
     }
 
 
-    static getTrainer(userID) {
+    static getTrainer(userId) {
         const trainers = Trainer.getTrainers();
-        const currentTrainer = trainers[userID];
+        const currentTrainer = trainers[userId];
         return currentTrainer;
     }
 
-    static async setTrainer(userID, data) {
+    static async setTrainer(userId, data) {
         const trainers = Trainer.getTrainers();
-        trainers[userID] = data ? data : new Trainer();
+        trainers[userId] = data ? data : new Trainer();
         fs.writeFile(`./pokemon-data/trainers.json`, JSON.stringify(trainers), (err) => {
             if(err) {
                 console.log(err)
@@ -28,17 +28,23 @@ class Trainer {
         });
     }
 
-    static pushPokemon(userID, pokemon) {
-        const trainer = Trainer.getTrainer(userID);
-
-        trainer['currentPokemon'].push(pokemon);
-        Trainer.setTrainer(userID, trainer);
+    static clearPokemon(userId) {
+        Trainer.setTrainer(userId, {
+            currentPokemon: []
+        });
     }
 
-    static canPush(userID) {
-        const { currentPokemon } = this.getTrainer(userID);
+    static pushPokemon(userId, pokemon) {
+        const trainer = Trainer.getTrainer(userId);
 
-        return currentPokemon.length < 6;
+        trainer['currentPokemon'].push(pokemon);
+        Trainer.setTrainer(userId, trainer);
+    }
+
+    static getTrainerPokemon(userId) {
+        const { currentPokemon } = Trainer.getTrainer(userId);
+
+        return currentPokemon;
     }
 }
 
