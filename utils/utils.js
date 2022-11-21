@@ -1,4 +1,4 @@
-const { Collection } = require(`discord.js`);
+const { Collection, AttachmentBuilder } = require(`discord.js`);
 const fs = require(`fs`);
 
 class Utils {
@@ -41,6 +41,9 @@ class Utils {
         return string[0].toUpperCase() + string.substring(1);
       }
 
+    static iconAttachment() {
+        return new AttachmentBuilder(`icon.png`, { name: `icon.png` });
+    }
 }
 
 

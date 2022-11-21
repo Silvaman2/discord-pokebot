@@ -1,4 +1,4 @@
-const { AttachmentBuilder, EmbedBuilder } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const Pokemon = require("../utils/pokemon");
 const { getTrainerPokemon, pushPokemon } = require("../utils/trainer");
 const { reply, simpleEmbed, capitalizeFirstLetter } = require('../utils/utils');
@@ -13,7 +13,7 @@ module.exports = {
             return;
         }
 
-        const icon = new AttachmentBuilder('icon.png', { name: 'icon.png' });
+        const icon = iconAttachment();
         const embed = new EmbedBuilder({
             color:16732992,
             title:'Welcome to the world of Pokémon',
