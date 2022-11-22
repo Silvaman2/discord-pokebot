@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Silvaman2/discord-pokebot#readme",
   "dependencies": {
+    "canvas": "^2.10.2",
     "discord.js": "^14.6.0"
   }
 }
