@@ -1,6 +1,6 @@
 const { AttachmentBuilder, EmbedBuilder } = require("discord.js");
 const Pokemon = require("../utils/pokemon");
-const { getTrainerPokemon, pushPokemon } = require("../utils/trainer");
+const Trainer = require("../utils/trainer");
 const { reply, simpleEmbed, capitalizeFirstLetter } = require('../utils/utils');
 
 module.exports = {
@@ -8,7 +8,8 @@ module.exports = {
     description:'Prompts you to choose a starter Pokemon',
     async execute(message, args) {
         const userId = message.author.id;
-        if(getTrainerPokemon(userId).length) {
+        const trainer = await Trainer.getTrainer(userId);
+        if(trainer['currentPokemon'].length) {
             reply(message, simpleEmbed('You\'ve already chosen a starter Pokémon!'));
             return;
         }
@@ -62,7 +63,9 @@ module.exports = {
         const data = await Pokemon.getPokemon(pokemonName);
         const newPokemon = new Pokemon(data);
 
-        pushPokemon(userId, newPokemon);
+        console.log('gameing');
+        Trainer.pushPokemon(userId, newPokemon);
+        console.log('gameing');
 
         const congratsMessage = simpleEmbed(`Congratulations on entering the world of Pokémon!`);
         congratsMessage.embeds[0].description = `You've chosen ${capitalizeFirstLetter(pokemonName)} as your first Pokémon.`;
