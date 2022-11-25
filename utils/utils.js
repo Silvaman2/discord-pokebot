@@ -56,8 +56,9 @@ class Utils {
 
         return canvas.toBuffer();
     }
+
 }
 
-
+        
 module.exports = Utils;
 
