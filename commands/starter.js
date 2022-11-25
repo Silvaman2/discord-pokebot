@@ -16,7 +16,7 @@ module.exports = {
             return;
         }
 
-        const icon = iconAttachment();
+        const icon = Utils.iconAttachment();
         const embed = new EmbedBuilder({
             color:16732992,
             title:'Welcome to the world of Pokémon',
