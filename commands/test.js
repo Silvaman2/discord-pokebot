@@ -1,6 +1,6 @@
-const { getPokemon } = require('../utils/pokemon');
-const { getTrainers, getTrainer } = require('../utils/trainer');
-const { reply, resizeImage } = require("../utils/utils");
+const Pokemon = require('../utils/pokemon');
+const Trainer = require('../utils/trainer');
+const Utils = require("../utils/utils");
 
 module.exports = {
     debug:true,
