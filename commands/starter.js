@@ -1,7 +1,8 @@
 const { AttachmentBuilder, EmbedBuilder } = require("discord.js");
 const Pokemon = require("../utils/pokemon");
+const PokeData = require("../utils/pokeData");
 const Trainer = require("../utils/trainer");
-const { reply, simpleEmbed, capitalizeFirstLetter } = require('../utils/utils');
+const Utils = require('../utils/utils');
 
 module.exports = {
     debug:false,
@@ -10,7 +11,7 @@ module.exports = {
         const userId = message.author.id;
         const trainer = await Trainer.getTrainer(userId);
         if(trainer['currentPokemon'].length) {
-            reply(message, simpleEmbed('You\'ve already chosen a starter Pokémon!'));
+            Utils.reply(message, Utils.simpleEmbed('You\'ve already chosen a starter Pokémon!'));
             return;
         }
 
@@ -38,7 +39,7 @@ module.exports = {
             }
         })
 
-        reply(message, {
+        Utils.reply(message, {
             embeds:[embed],
             files:[icon]
         })
@@ -55,21 +56,21 @@ module.exports = {
         .split(' ')[1]
         .toLowerCase();
 
-        if(!Pokemon.starterPokemon.includes(pokemonName)) {
-            reply(message, simpleEmbed('Invalid starter Pokémon!'));
+        if(!PokeData.starterPokemon.includes(pokemonName)) {
+            Utils.reply(message, Utils.simpleEmbed('Invalid starter Pokémon!'));
             return;
         }
 
-        const data = await Pokemon.getPokemon(pokemonName);
+        const data = await PokeData.getPokemon(pokemonName);
         const newPokemon = new Pokemon(data);
 
         console.log('gameing');
         Trainer.pushPokemon(userId, newPokemon);
         console.log('gameing');
 
-        const congratsMessage = simpleEmbed(`Congratulations on entering the world of Pokémon!`);
-        congratsMessage.embeds[0].description = `You've chosen ${capitalizeFirstLetter(pokemonName)} as your first Pokémon.`;
+        const congratsMessage = Utils.simpleEmbed(`Congratulations on entering the world of Pokémon!`);
+        congratsMessage.embeds[0].description = `You've chosen ${Utils.capitalizeFirstLetter(pokemonName)} as your first Pokémon.`;
 
-        reply(message, congratsMessage);
+        Utils.reply(message, congratsMessage);
     }
 }
