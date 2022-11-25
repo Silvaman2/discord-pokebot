@@ -1,7 +1,6 @@
 const Pokemon = require("../utils/pokemon") ;
 const { AttachmentBuilder, EmbedBuilder } = require('discord.js');
-const { iconAttachment, reply } = require("../utils/utils");
-const { pokemonSprite } = require("../utils/pokemon");
+const Utils = require("../utils/utils");
 
 module.exports = {
     debug:false,
@@ -11,22 +10,25 @@ module.exports = {
     async execute(message, args){
         const thisPokemon = args[0];
         const data = await Pokemon.getPokemon(thisPokemon);
-        const icon = iconAttachment();
-        const spriteAttachment = new AttachmentBuilder(pokemonSprite(data), { name: 'spriteAttachment.png'});
+        const icon = Utils.iconAttachment();
+        const spriteAttachment = new AttachmentBuilder(await Utils.resizeImage(Pokemon.pokemonSprite(data), 256, 256), { name: 'spriteAttachment.png'});
+        const [type1, type2] = data.types.map(t => Utils.capitalizeFirstLetter(t.type.name));
         
         console.log(spriteAttachment);
         const embed = new EmbedBuilder({
             color:16732992,
-            title:data.name,
+            title:Utils.capitalizeFirstLetter(data.name),
             description:'yo mama',
             fields:[
                 {
-                    name:`ID1:`,
-                    value:data.id.toString()
+                    name:`Types:`,
+                    value:`-${type1}\n-${type2}`,
+                    inline: true
                 },
                 {
                     name:`ID2:`,
-                    value:data.id.toString()
+                    value:data.id.toString(),
+                    inline: true
                 },
             ],
             thumbnail:{
@@ -37,7 +39,7 @@ module.exports = {
             },
         })
     
-        reply(message, {
+        Utils.reply(message, {
             embeds: [embed],
             files: [icon,spriteAttachment]
         })

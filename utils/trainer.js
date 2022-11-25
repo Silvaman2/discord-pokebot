@@ -17,7 +17,6 @@ class Trainer {
 
     static async getTrainer(userId) {
         let trainers = await Trainer.getTrainers();
-
         if(!trainers[userId]) {
             await Trainer.setTrainer(userId);
             trainers = await Trainer.getTrainers();
