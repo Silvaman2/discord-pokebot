@@ -4,6 +4,8 @@ class Pokemon {
     constructor(data) {
     this[`id`] = data[`id`];
     this[`name`] = data[`name`];
+    this[`sprite_front`] = Pokemon.pokemonSprite(data);
+    this[`types`] = data[`types`].map(t => t.type.name);
     }
 
     static async getPokemon(element) {
@@ -24,6 +26,10 @@ class Pokemon {
         'torchic',
         'mudkip'
     ]
+
+    static pokemonSprite(data) {
+      return data[`sprites`][`versions`][`generation-iii`][`emerald`][`front_default`];
+    }
 }
 
 

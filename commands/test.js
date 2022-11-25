@@ -5,6 +5,5 @@ const { reply, resizeImage } = require("../utils/utils");
 module.exports = {
     debug:true,
     description: `test command`,
-    async execute(message, args) {
-    }
+    async execute(message, args) {    }
 }

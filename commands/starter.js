@@ -1,7 +1,8 @@
-const { AttachmentBuilder, EmbedBuilder } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const Pokemon = require("../utils/pokemon");
 const Trainer = require("../utils/trainer");
-const { reply, simpleEmbed, capitalizeFirstLetter } = require('../utils/utils');
+const { reply, simpleEmbed, capitalizeFirstLetter, iconAttachment } = require('../utils/utils');
+const {prefix} = require("../config.json");
 
 module.exports = {
     debug:false,
@@ -14,7 +15,7 @@ module.exports = {
             return;
         }
 
-        const icon = new AttachmentBuilder('icon.png', { name: 'icon.png' });
+        const icon = iconAttachment();
         const embed = new EmbedBuilder({
             color:16732992,
             title:'Welcome to the world of Pokémon',
@@ -43,7 +44,7 @@ module.exports = {
             files:[icon]
         })
 
-        const filter = m => m.author.id === userId && m.content.startsWith('!choose ');
+        const filter = m => m.author.id === userId && m.content.startsWith(prefix+"choose");
 
         const responses = await message.channel.awaitMessages( { filter , max: 1, time:120_000, errors: ['time']}).catch(() => null);
 
