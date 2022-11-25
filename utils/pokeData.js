@@ -7,6 +7,21 @@ class PokeData {
 
         return pokemon;
     }
+    
+    static pokemonSprite(data) {
+        return data[`sprites`][`versions`][`generation-iii`][`emerald`][`front_default`];
+    }
+
+
+    static async getSpecies(data) {
+        const url = data.species.url;
+        const species = await Utils.fetchJSON(url);
+        return species;
+    }
+
+
+
+
 
 
     static starterPokemon = [

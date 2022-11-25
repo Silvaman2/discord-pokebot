@@ -65,9 +65,7 @@ module.exports = {
         const data = await PokeData.getPokemon(pokemonName);
         const newPokemon = new Pokemon(data);
 
-        console.log('gameing');
         Trainer.pushPokemon(userId, newPokemon);
-        console.log('gameing');
 
         const congratsMessage = Utils.simpleEmbed(`Congratulations on entering the world of Pokémon!`);
         congratsMessage.embeds[0].description = `You've chosen ${Utils.capitalizeFirstLetter(pokemonName)} as your first Pokémon.`;
