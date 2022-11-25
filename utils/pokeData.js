@@ -19,6 +19,15 @@ class PokeData {
         return species;
     }
 
+    static getHeight(data) {
+        const height = data.height * 0.1;
+        return height;
+    }
+    static getWeight(data) {
+        const weight = data.weight * 0.1;
+        return weight;
+    }
+
 
 
 
@@ -35,12 +44,6 @@ class PokeData {
         'torchic',
         'mudkip'
     ]
-
-
-
-    static pokemonSprite(data) {
-        return data[`sprites`][`versions`][`generation-iii`][`emerald`][`front_default`];
-      }
 }
 
 
