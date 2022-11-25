@@ -20,6 +20,12 @@ class PokeData {
         'torchic',
         'mudkip'
     ]
+
+
+
+    static pokemonSprite(data) {
+        return data[`sprites`][`versions`][`generation-iii`][`emerald`][`front_default`];
+      }
 }
 
 
