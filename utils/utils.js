@@ -1,5 +1,6 @@
 const { Collection, AttachmentBuilder } = require(`discord.js`);
 const fs = require(`fs`);
+const Canvas = require('canvas');
 
 class Utils {
 
@@ -21,8 +22,8 @@ class Utils {
         message.channel.send(inputString);
     }
 
-    static async fetchJSON(url) {
-        const request = await fetch(url);
+    static async fetchJSON(url, options) {
+        const request = await fetch(url, options);
         const result = await request.json();
 
         return result;
@@ -39,10 +40,21 @@ class Utils {
 
     static capitalizeFirstLetter(string) {
         return string[0].toUpperCase() + string.substring(1);
-      }
+    }
 
     static iconAttachment() {
         return new AttachmentBuilder(`icon.png`, { name: `icon.png` });
+    }
+
+    static async resizeImage(imageUrl, width, height) {
+        const canvas = Canvas.createCanvas(width, height);
+        const ctx = canvas.getContext('2d');
+        ctx.imageSmoothingEnabled = false;
+
+        const image = await Canvas.loadImage(imageUrl);
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+        return canvas.toBuffer();
     }
 }
 
