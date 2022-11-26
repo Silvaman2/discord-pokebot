@@ -9,7 +9,6 @@ module.exports = {
 
     async execute(message, args){
         const thisPokemon = args[0];
-
         const data = await PokeData.getPokemon(thisPokemon);
         if(!data) {
             Utils.reply(message, Utils.simpleEmbed('Invalid Pokémon.'));

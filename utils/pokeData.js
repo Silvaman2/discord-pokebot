@@ -2,10 +2,14 @@ const Utils = require("./utils");
 
 class PokeData {
     static async getPokemon(element) {
+        
+        if(!element) return;
         const id = element.toString().toLowerCase();
+        let pokemon;
+
         try {
-            const pokemon = await Utils.fetchJSON(`https://pokeapi.co/api/v2/pokemon/${id}`);
-            if(pokemon.id > PokeData.pokemonCount) throw 'Invalid Pokemon.';
+            pokemon = await Utils.fetchJSON(`https://pokeapi.co/api/v2/pokemon/${id}`);
+            if(pokemon.id > PokeData.pokemonCount || pokemon.id <= 0) throw 'Invalid Pokemon.';
         } catch (error) {
             return undefined;
         }

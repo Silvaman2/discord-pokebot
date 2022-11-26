@@ -12,6 +12,7 @@ module.exports = {
     async execute(message, args) {
         const randomNumber = args[0]; //Need to replace args with a random number gen.
         const data = await PokeData.getPokemon(randomNumber);
+        if(!data) return;
         const icon = Utils.iconAttachment();
         const spriteAttachment = new AttachmentBuilder(await Utils.resizeImage(PokeData.pokemonSprite(data), 256, 256), { name: 'spriteAttachment.png'});
         const answer = data.name;
@@ -40,8 +41,8 @@ module.exports = {
 
         if(!responses) return;
         const response = Array.from(responses.values())[0];
-        
-        if(response.content.endsWith(answer)) {
+        console.log(data);
+        if(response.content.toLowerCase().endsWith(answer)) {
             Utils.reply(message,Utils.simpleEmbed('Correct!'));
             
             const userId = response.author.id;
