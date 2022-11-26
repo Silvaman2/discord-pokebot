@@ -3,7 +3,7 @@ const Utils = require("./utils");
 class PokeData {
     static async getPokemon(element) {
         const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 200);
+        const timeout = setTimeout(() => controller.abort(), 1000);
 
         const id = element.toString().toLowerCase();
         const pokemon = await Utils.fetchJSON(`https://pokeapi.co/api/v2/pokemon/${id}`, {
