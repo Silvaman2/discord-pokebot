@@ -9,7 +9,7 @@ class PokeData {
 
         try {
             pokemon = await Utils.fetchJSON(`https://pokeapi.co/api/v2/pokemon/${id}`);
-            if(pokemon.id > PokeData.pokemonCount || pokemon.id <= 0) throw 'Invalid Pokemon.';
+            if(pokemon.id > PokeData.pokemonCount) throw 'Invalid Pokemon.';
         } catch (error) {
             return undefined;
         }
