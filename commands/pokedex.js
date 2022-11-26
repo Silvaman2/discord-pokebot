@@ -17,8 +17,7 @@ module.exports = {
         const description = species['flavor_text_entries']
         .find(currentVersion => currentVersion[`version`][`name`] === `emerald`)
         ['flavor_text'];
-        
-        console.log(spriteAttachment);
+
         const embed = new EmbedBuilder({
             color:16732992,
             title:Utils.capitalizeFirstLetter(data.name),
