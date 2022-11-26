@@ -3,14 +3,13 @@ const fs = require(`fs`);
 const Canvas = require('canvas');
 
 class Utils {
-
     static commandHandler() {
         const commands = new Collection();
-        const commandFiles = fs.readdirSync(`./commands/`).filter(file => file.endsWith(`.js`));
+        const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
     
-        for(const commandFile of commandFiles) {
+        for (const commandFile of commandFiles) {
             const command = require(`../commands/${commandFile}`);
-            const [commandName] = commandFile.split(`.`);
+            const [commandName] = commandFile.split('.');
     
             commands.set(commandName, command);
         }
@@ -24,20 +23,25 @@ class Utils {
 
     static async fetchJSON(url, options) {
         let result;
+
         try {
             const response = await fetch(url, options);
             result = await response.json();
-        } catch {}
+        } catch (e) {
+            console.log('An error occured fetching data.');
+        }
 
         return result;
     }
 
     static simpleEmbed(title) {
         return {
-            embeds:[{
-                color:16732992,
-                title:title
-            }]
+            embeds: [
+                {
+                    color: 16732992,
+                    title: title
+                }
+            ]
         }
     }
 
@@ -46,7 +50,7 @@ class Utils {
     }
 
     static iconAttachment() {
-        return new AttachmentBuilder(`icon.png`, { name: `icon.png` });
+        return new AttachmentBuilder('icon.png', { name: 'icon.png' });
     }
 
     static async resizeImage(imageUrl, width, height) {
@@ -59,11 +63,6 @@ class Utils {
 
         return canvas.toBuffer();
     }
-
-
-    
 }
 
-        
 module.exports = Utils;
-

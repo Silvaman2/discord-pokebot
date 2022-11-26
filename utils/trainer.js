@@ -11,26 +11,26 @@ class Trainer {
         } catch (e) {
             fs.writeFileSync('./pokemon-data/trainers.json', '{}');
         }
+
         return require('../pokemon-data/trainers.json');
     }
 
-
     static async getTrainer(userId) {
         let trainers = await Trainer.getTrainers();
-        if(!trainers[userId]) {
+        if (!trainers[userId]) {
             await Trainer.setTrainer(userId);
             trainers = await Trainer.getTrainers();
         }
 
-        const currentTrainer = trainers[userId];
-        return currentTrainer;
+        return trainers[userId];
     }
 
     static async setTrainer(userId, data) {
         const trainers = await Trainer.getTrainers();
         trainers[userId] = data ? data : new Trainer();
-        fs.writeFileSync(`./pokemon-data/trainers.json`, JSON.stringify(trainers), (err) => {
-            if(err) {
+        
+        fs.writeFileSync('./pokemon-data/trainers.json', JSON.stringify(trainers), (err) => {
+            if (err) {
                 console.log(err)
             } else {
                 console.log('File successfully written!');
