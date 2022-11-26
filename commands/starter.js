@@ -6,6 +6,7 @@ const Utils = require('../utils/utils');
 const {prefix} = require("../config.json");
 
 module.exports = {
+    arguments: [],
     debug:false,
     description:'Prompts you to choose a starter Pokemon',
     async execute(message, args) {

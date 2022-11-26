@@ -3,6 +3,11 @@ const { AttachmentBuilder, EmbedBuilder } = require('discord.js');
 const Utils = require("../utils/utils");
 
 module.exports = {
+    arguments: [
+        {
+            filter: () => true
+        }
+    ],
     debug:false,
     description: 'Shows information about a pokemon chosen by the trainer. Can be used with ID or name of the pokemon',
 
@@ -10,8 +15,11 @@ module.exports = {
     async execute(message, args){
         const thisPokemon = args[0];
 
+
         const data = await PokeData.getPokemon(thisPokemon);
-        if(!data) {
+
+
+        if(!data || data.id > PokeData.pokemonCount) {
             Utils.reply(message, Utils.simpleEmbed('Invalid Pokémon.'));
             return;
         }
@@ -25,7 +33,6 @@ module.exports = {
         .find(currentVersion => currentVersion[`version`][`name`] === `emerald`)
         ['flavor_text'];
         
-        console.log(spriteAttachment);
         const embed = new EmbedBuilder({
             color:16732992,
             title:Utils.capitalizeFirstLetter(data.name),

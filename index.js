@@ -23,13 +23,16 @@ client.on(Events.MessageCreate, message => {
     const command = messageArray.shift();
     const arguments = messageArray;
 
-    if(Array.from(client.commands.keys()).includes(command)) {
-        try {
-            client.commands.get(command).execute(message, arguments);
-        } catch (e) {
-            console.log(e);
-        }
+    const commandFunction = client.commands.get(command);
+
+    if(!commandFunction) return;
+    const invalidArg = commandFunction.arguments.find((argument, index) => !(argument.filter(arguments[index]) && arguments[index]));
+    if(invalidArg) {
+        Utils.reply(message, Utils.simpleEmbed('Invalid arguments.'));
+        return;
     }
+    commandFunction.execute(message, arguments);
+
 })
 
 

@@ -23,8 +23,11 @@ class Utils {
     }
 
     static async fetchJSON(url, options) {
-        const request = await fetch(url, options);
-        const result = await request.json();
+        let result;
+        try {
+            const response = await fetch(url, options);
+            result = await response.json();
+        } catch {}
 
         return result;
     }
