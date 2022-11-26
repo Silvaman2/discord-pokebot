@@ -1,2 +1,5 @@
-# discord pokebot
+# Pokebot
  
+### Commands
+- pokedex
+- starter
