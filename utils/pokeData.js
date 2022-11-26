@@ -4,7 +4,10 @@ class PokeData {
     static async getPokemon(element) {
         const id = element.toString().toLowerCase();
         const pokemon = await Utils.fetchJSON(`https://pokeapi.co/api/v2/pokemon/${id}`);
-
+        
+        if(pokemon.id > PokeData.pokemonCount) return undefined;
+        
+        
         return pokemon;
     }
     
@@ -44,6 +47,7 @@ class PokeData {
         'torchic',
         'mudkip'
     ]
+    static pokemonCount = 386;
 }
 
 
