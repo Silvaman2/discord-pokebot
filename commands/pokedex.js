@@ -9,7 +9,14 @@ module.exports = {
 
     async execute(message, args){
         const thisPokemon = args[0];
+
         const data = await PokeData.getPokemon(thisPokemon);
+        if(!data) {
+            Utils.reply(message, Utils.simpleEmbed('Invalid Pokémon.'));
+            return;
+        }
+
+
         const species = await PokeData.getSpecies(data);
         const icon = Utils.iconAttachment();
         const spriteAttachment = new AttachmentBuilder(await Utils.resizeImage(PokeData.pokemonSprite(data), 256, 256), { name: 'spriteAttachment.png'});

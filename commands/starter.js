@@ -45,13 +45,15 @@ module.exports = {
             files:[icon]
         })
 
-        const filter = m => m.author.id === userId && m.content.startsWith(prefix+"choose");
+        const filter = m => m.content.startsWith(prefix+"choose");
 
-        const responses = await message.channel.awaitMessages( { filter , max: 1, time:120_000, errors: ['time']}).catch(() => null);
+        const responses = await message.channel.awaitMessages( {filter:m => m.author.id === userId, max: 1, time:120_000, errors: ['time']}).catch(() => null);
 
         if(!responses) return;
 
         const response = Array.from(responses.values())[0];
+        
+        if(!filter(response)) return;
 
         const pokemonName = response.content
         .split(' ')[1]

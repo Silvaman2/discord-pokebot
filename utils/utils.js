@@ -57,6 +57,8 @@ class Utils {
         return canvas.toBuffer();
     }
 
+
+    
 }
 
         
