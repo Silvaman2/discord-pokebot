@@ -10,8 +10,6 @@ class PokeData {
             return undefined;
         }
         
-        
-        
         return pokemon;
     }
     

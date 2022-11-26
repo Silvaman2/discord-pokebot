@@ -11,7 +11,6 @@ module.exports = {
         const thisPokemon = args[0];
 
         const data = await PokeData.getPokemon(thisPokemon);
-        console.log('gameing');
         if(!data) {
             Utils.reply(message, Utils.simpleEmbed('Invalid Pokémon.'));
             return;
